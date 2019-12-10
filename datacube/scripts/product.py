@@ -220,3 +220,17 @@ def show_product(dc, product_name, output_format):
             sys.exit(1)
         product, *_ = products
         click.echo_via_pager(json.dumps(product.definition, indent=4))
+
+
+@product_cli.command('delete')
+@click.argument('product_name', nargs=-1)
+@ui.pass_index()
+def delete_product(index, product_name):
+    """
+    Delete a product from an ODC database.
+
+    If the product has no Datasets, no further confirmation is required.
+
+    If the product does have Datasets, suggest how to delete the datasets.
+
+    """

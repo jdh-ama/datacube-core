@@ -486,3 +486,14 @@ def _restore_one(dry_run: bool,
         click.echo('restoring %s %s %s' % (d.type.name, d.id, d.local_uri))
     if not dry_run:
         index.datasets.restore(d.id for d in to_process)
+
+
+@dataset_cmd.command('delete', help="Delete datasets")
+@click.argument('ids', nargs=-1)
+@ui.pass_index()
+def dataset_delete(index, ids):
+    """
+    Delete Dataset(s) from the database
+
+    Easy if they have nothing derived from them.
+    """

@@ -4,6 +4,10 @@
 set -eu
 set -x
 
+[ -n "${GDAL_DATA}" ] || {
+   export GDAL_DATA=$(gdal-config --datadir)
+}
+
 pycodestyle tests integration_tests examples utils --max-line-length 120
 
 pylint -j 2 --reports no datacube datacube_apps
